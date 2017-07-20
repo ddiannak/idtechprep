@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head>
+        <style>
+            html {
+                height: 100%;
+
+            }
+            .innerpls {
+              height: 400px;
+              line-height: 300px;
+              text-align: center;
+
+            }
+            .greeetingpls {
+                height: 100px;
+                line-height: 100px;
+                justify-content: center;
+                text-align: center;
+            }
+            .words {
+                color: white;     
+                font-family: sans-serif, cursive;
+                display: inherit;
+                font-size: 70px;
+                justify-content: center;
+                vertical-align: bottom;
+                text-align: center;
+                line-height: normal;
+            }
+
+            
+        </style>
+        <script>
+            // Gets the current day information from the computer
+           	var date = new Date();
+            // Tells the code to run after the page has loaded
+            window.onload = function () {
+            	// Gets the hours from the day information
+            	function updateHours() {
+            		return date.getHours();
+            	}
+            	// Gets the minutes from the day information
+            	function updateMinutes() {
+            		return date.getMinutes();
+            	}
+            	function updateTime() {
+            		var minutes = updateMinutes();
+              		var hours = updateHours();
+                	//Format minutes to have a 0 for neatness
+                	if (minutes <10) {
+                   		minutes = "0" + minutes
+                	}
+                	// Time formatter
+                	var time_string = hours + ":" + minutes + " ";
+                	//Format am and pm
+                	if (hours > 11) {
+                    	time_string += "PM";
+                	} else {
+                    	time_string += "AM";
+               		}  
+                	document.getElementById("timeofday").innerHTML = time_string;
+
+            }
+                updateTime();
+                // Set interval
+                setInterval(updateTime, 6000);
+                
+                // Creates an empty box to hold the greeting
+                var message;
+
+                // Create the greeting variable here
+                var greeting = document.getElementById("greeting"); 
+
+                // Set user name
+               // var name = prompt("Enter the name you want to use.");
+                var name = "Cherry";
+ 				// Get time
+                var hour = updateHours();
+                
+                // Checks what time of day it is
+                // *****************************************
+                if(hour > 18){
+                    message = "Good evening, "+name+".";
+                    document.body.style.backgroundImage = "url('aurora.jpg')";
+                    document.body.style.backgroundPosition="center";
+                } else if (hour > 12) {
+                    message = "Good afternoon, "+name+".";
+                    document.body.style.backgroundImage = "url('sunset.jpg')";
+                    document.body.style.backgroundPosition="center";
+                } else if (hour > 0) {
+                    message = "Good morning, " +name+".";
+                    document.body.style.backgroundImage = "url('forest.jpg')";
+                    document.body.style.backgroundPosition="center";
+                } else {
+                    message = "Hello, "+name+".";
+                }
+                // ******************************************
+                 
+                // Set the content on the page with innerHTML here
+                greeting.innerHTML = message;
+            }            
+        </script>      
+    </head>    
+    <body>
+         
+        <!-- Add the <h1> block here -->
+
+        <div class="innerpls">
+            <br />
+            <h1 class="words" id="timeofday">00:00</h1>
+        </div>
+        <div class="greetingpls">
+            <p class="words" id="greeting">Hello!</p>
+
+        </div>
+
+    
+</body></html>
