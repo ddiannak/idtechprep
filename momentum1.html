@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+    <head>
         <style>
             html {
                 height: 100%;
-
             }
-            .innerpls {
+            .wordspace {
               height: 400px;
               line-height: 300px;
               text-align: center;
-
             }
-            .greeetingpls {
+            .greeetingspace {
                 height: 100px;
                 line-height: 100px;
                 justify-content: center;
@@ -27,22 +26,26 @@
                 text-align: center;
                 line-height: normal;
             }
-
             
         </style>
         <script>
             // Gets the current day information from the computer
-           	var date = new Date();
+            function getDate() {
+                var date = new Date();
+                return date;
+            }
+
             // Tells the code to run after the page has loaded
             window.onload = function () {
             	// Gets the hours from the day information
             	function updateHours() {
-            		return date.getHours();
+            		return getDate().getHours();
             	}
             	// Gets the minutes from the day information
             	function updateMinutes() {
-            		return date.getMinutes();
+            		return getDate().getMinutes();
             	}
+                //Gets the time and formats it so it prints in 00:00A/PM format, then changes the html element that displays the time
             	function updateTime() {
             		var minutes = updateMinutes();
               		var hours = updateHours();
@@ -59,33 +62,31 @@
                     	time_string += "AM";
                		}  
                 	document.getElementById("timeofday").innerHTML = time_string;
-
             }
+                //Does the updateTime function
                 updateTime();
-                // Set interval
-                setInterval(updateTime, 6000);
+                // Set interval to update the time every 1 second
+                setInterval(updateTime, 1000);
                 
                 // Creates an empty box to hold the greeting
                 var message;
-
                 // Create the greeting variable here
                 var greeting = document.getElementById("greeting"); 
-
                 // Set user name
-               // var name = prompt("Enter the name you want to use.");
-                var name = "Cherry";
+                var name = prompt("Enter the name you want to use.");
+                //var name = "Cherry";
  				// Get time
                 var hour = updateHours();
                 
                 // Checks what time of day it is
                 // *****************************************
-                if(hour > 18){
+                if(hour >= 18){
                     message = "Good evening, "+name+".";
-                    document.body.style.backgroundImage = "url('aurora.jpg')";
-                    document.body.style.backgroundPosition="center";
-                } else if (hour > 12) {
-                    message = "Good afternoon, "+name+".";
                     document.body.style.backgroundImage = "url('sunset.jpg')";
+                    document.body.style.backgroundPosition="center";
+                } else if (hour >= 12) {
+                    message = "Good afternoon, "+name+".";
+                    document.body.style.backgroundImage = "url('forestlake.jpg')";
                     document.body.style.backgroundPosition="center";
                 } else if (hour > 0) {
                     message = "Good morning, " +name+".";
@@ -98,6 +99,7 @@
                  
                 // Set the content on the page with innerHTML here
                 greeting.innerHTML = message;
+
             }            
         </script>      
     </head>    
@@ -105,14 +107,18 @@
          
         <!-- Add the <h1> block here -->
 
-        <div class="innerpls">
+        <div class="wordspace">
             <br />
             <h1 class="words" id="timeofday">00:00</h1>
         </div>
-        <div class="greetingpls">
+        <div class="greetingspace">
             <p class="words" id="greeting">Hello!</p>
 
         </div>
+        <!--<div style="justify-content: center">
+            <a href="popup.html">popup</a>
+        </div>-->
 
     
-</body></html>
+</body>
+</html>
